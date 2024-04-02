@@ -85,7 +85,10 @@ main {
   color: #666;
   padding: 0.5rem 0 0;
 }
-
+.form-field-checkbox__label{
+  font-size: 0.9rem;
+  color: #666;
+}
 .entry,
 .textarea {
   padding: 0.5rem;
