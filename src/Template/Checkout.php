@@ -118,6 +118,9 @@ class Checkout extends Layout
                                 <input type="checkbox" id="beta_program_subscription" name="beta_program_subscription" value="true">
                                 <label class="form-field-checkbox__label" for="beta_program_subscription">With our “Rise & Shine” beta program, you get early access to new features, but they may not always work perfectly. You can change your beta preference at any time after you join. </label>
                             </div>
+                            <div class="form-field">
+                                <input type="submit" class="default-btn full" value="Place Order" title="Place Order">
+                            </div>
                         </div>
                     </div>
                 </form>
