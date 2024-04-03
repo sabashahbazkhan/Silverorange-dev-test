@@ -16,6 +16,22 @@ class Post
     {
         $this->db = $db;
     }
+    public function getAllPosts()
+    {
+        try {
+            // Prepare SQL statement
+            $sql = "SELECT posts.*, authors.full_name FROM posts
+                   LEFT JOIN authors ON posts.author = authors.id
+                   ORDER BY posts.created_at DESC; ";
+            $stmt = $this->db->query($sql);
+            // Fetch all posts as associative array
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            // Handle database errors
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
     public function importPosts($jsonData)
     {
         try {
@@ -54,7 +70,7 @@ class Post
             }
             return $record;
         } catch (\PDOException $e) {
-                echo "Error: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
 }
