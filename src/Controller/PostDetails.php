@@ -5,20 +5,22 @@ namespace silverorange\DevTest\Controller;
 use silverorange\DevTest\Context;
 use silverorange\DevTest\Template;
 use silverorange\DevTest\Model;
+use silverorange\DevTest\Model\Post;
 
 class PostDetails extends Controller
 {
-    private ?Model\Post $post = null;
+    private array $post = [];
 
     public function getContext(): Context
     {
         $context = new Context();
 
-        if ($this->post === null) {
+        if (empty($this->post)) {
             $context->title = 'Not Found';
             $context->content = "A post with id {$this->params[0]} was not found.";
         } else {
-            $context->title = $this->post->title;
+            $context->title = $this->post['title'];
+            $context->content = json_encode($this->post);
         }
 
         return $context;
@@ -45,6 +47,15 @@ class PostDetails extends Controller
     protected function loadData(): void
     {
         // TODO: Load post from database here. $this->params[0] is the post id.
-        $this->post = null;
+
+        $postObj = new Post($this->db);
+        $posts = $postObj->getPostByID($this->params[0]);
+        // Display the fetched posts (or do whatever you want with them)
+        if ($posts !== false) {
+            $this->post =         $posts[0];
+        } else {
+            // Handle the case where fetching posts failed
+            echo "Failed to fetch posts.";
+        }
     }
 }

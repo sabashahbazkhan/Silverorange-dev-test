@@ -32,6 +32,24 @@ class Post
             return false;
         }
     }
+
+    public function getPostByID($id)
+    {
+        try {
+            // Prepare SQL statement
+            $sql = "SELECT posts.*, authors.full_name FROM posts
+                   LEFT JOIN authors ON posts.author = authors.id
+                   WHERE posts.id = '" . $id . "' ; ";
+
+            $stmt = $this->db->query($sql);
+            // Fetch all posts as associative array
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            // Handle database errors
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
     public function importPosts($jsonData)
     {
         try {

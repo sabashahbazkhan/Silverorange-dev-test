@@ -116,7 +116,13 @@ main {
 .heading-link {
   color: #666;
 }
-
+.back-btn {
+  padding: 15px;
+  background: #ccc;
+  border: 1px solid #666;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .entry,
 .textarea {
   padding: 0.5rem;
